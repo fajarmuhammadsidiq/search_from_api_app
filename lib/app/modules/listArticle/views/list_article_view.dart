@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:news_app/app/data/endpoint.dart';
-
+import 'package:news_app/app/routes/app_pages.dart';
+import 'package:lottie/lottie.dart';
 import '../controllers/list_article_controller.dart';
 
 class ListArticleView extends GetView<ListArticleController> {
@@ -17,36 +18,52 @@ class ListArticleView extends GetView<ListArticleController> {
           centerTitle: true,
         ),
         body: FutureBuilder(
-          future: controller.getData(data.path.toString()),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
+            future: controller.getData(data.path.toString()),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              if (!snapshot.hasData) {
+                return Container(
+                  width: Get.width,
+                  color: Colors.white,
+                  child: Column(
+                    children: [
+                      Lottie.asset("assets/relax.json", fit: BoxFit.cover),
+                      SizedBox(height: 10),
+                      Text("Maaf , untuk article nya masih belum tersedia")
+                    ],
+                  ),
+                );
+              }
               return ListView.builder(
                 itemCount: snapshot.data?.data?.posts?.length,
                 itemBuilder: (context, index) {
-                  return snapshot.data?.data?.posts?[index] == null
-                      ? Container(
-                          child: Center(
-                            child: Text("data kosong"),
+                  final listArticle = snapshot.data?.data?.posts?[index];
+                  return Card(
+                    child: ListTile(
+                      onTap: () => Get.toNamed(Routes.DETAIL_ARTICLE,
+                          arguments: listArticle),
+                      leading: Container(
+                        width: 50,
+                        height: Get.height,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image: NetworkImage("${listArticle?.thumbnail}"),
                           ),
-                        )
-                      : ListTile(
-                          leading: Text("${index + 1}" == null
+                        ),
+                      ),
+                      title: Text(
+                          textAlign: TextAlign.justify,
+                          "${listArticle?.title}" == null
                               ? "Article belum ada"
-                              : "${index + 1}"),
-                          title: Text(
-                              "${snapshot.data?.data?.posts![index].title}" ==
-                                      null
-                                  ? "Article belum ada"
-                                  : "${snapshot.data?.data?.posts![index].title}"),
-                        );
+                              : "${listArticle?.title}"),
+                    ),
+                  );
                 },
               );
-            }
-          },
-        ));
+            }));
   }
 }

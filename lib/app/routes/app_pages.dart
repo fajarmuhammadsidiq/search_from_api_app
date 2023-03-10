@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/DetailArticle/bindings/detail_article_binding.dart';
+import '../modules/DetailArticle/views/detail_article_view.dart';
 import '../modules/antara/bindings/antara_binding.dart';
 import '../modules/antara/views/antara_view.dart';
 import '../modules/detailportal/bindings/detailportal_binding.dart';
@@ -29,13 +31,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAILPORTAL,
-      page: () => const DetailportalView(),
+      page: () => DetailportalView(),
       binding: DetailportalBinding(),
     ),
     GetPage(
       name: _Paths.LIST_ARTICLE,
       page: () => const ListArticleView(),
       binding: ListArticleBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_ARTICLE,
+      page: () => const DetailArticleView(),
+      binding: DetailArticleBinding(),
     ),
   ];
 }

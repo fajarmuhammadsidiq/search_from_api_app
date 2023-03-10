@@ -7,6 +7,7 @@ abstract class Routes {
   static const ANTARA = _Paths.ANTARA;
   static const DETAILPORTAL = _Paths.DETAILPORTAL;
   static const LIST_ARTICLE = _Paths.LIST_ARTICLE;
+  static const DETAIL_ARTICLE = _Paths.DETAIL_ARTICLE;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const ANTARA = '/antara';
   static const DETAILPORTAL = '/detailportal';
   static const LIST_ARTICLE = '/list-article';
+  static const DETAIL_ARTICLE = '/detail-article';
 }

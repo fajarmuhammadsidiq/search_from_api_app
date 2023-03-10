@@ -5,16 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:news_app/app/data/endpoint.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:news_app/app/routes/app_pages.dart';
 import '../controllers/detailportal_controller.dart';
 
 class DetailportalView extends GetView<DetailportalController> {
-  const DetailportalView({Key? key}) : super(key: key);
-
+  DetailportalView({Key? key}) : super(key: key);
+  Endpoints data = Get.arguments;
   @override
   Widget build(BuildContext context) {
-    Endpoints data = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('${data.name}'),
