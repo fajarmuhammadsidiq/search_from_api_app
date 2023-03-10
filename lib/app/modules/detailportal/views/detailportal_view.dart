@@ -15,7 +15,7 @@ class DetailportalView extends GetView<DetailportalController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${data.name}'),
+        title: Text('${data.name!.toUpperCase()}'),
         centerTitle: true,
       ),
       body: Padding(

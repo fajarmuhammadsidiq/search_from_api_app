@@ -26,14 +26,12 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('ListBerita'),
+          title: const Text('Portal Berita'),
           centerTitle: true,
         ),
         body: RefreshIndicator(
           onRefresh: refreshData,
           child: ListView(children: [
-            TextField(),
-            SizedBox(height: 20),
             FutureBuilder(
               future: controller.getData(),
               builder: (context, snapshot) {
