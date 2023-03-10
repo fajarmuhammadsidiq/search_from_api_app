@@ -7,6 +7,7 @@ import 'app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
+      theme: ThemeData(appBarTheme: AppBarTheme(backgroundColor: Colors.teal)),
       title: "Application",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

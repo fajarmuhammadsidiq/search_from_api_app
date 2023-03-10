@@ -18,7 +18,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
-    final color1 = RandomColor();
     final controller = Get.find<HomeController>();
     Future refreshData() async {
       await Future.delayed(Duration(seconds: 2));
@@ -29,7 +28,6 @@ class _HomeViewState extends State<HomeView> {
         appBar: AppBar(
           title: const Text('ListBerita'),
           centerTitle: true,
-          backgroundColor: Colors.teal,
         ),
         body: RefreshIndicator(
           onRefresh: refreshData,
@@ -54,6 +52,11 @@ class _HomeViewState extends State<HomeView> {
                       itemBuilder: (context, index) {
                         final data1 = snapshot.data!.endpoints![index];
                         final data0 = snapshot.data!.endpoints![index].paths;
+                        final rnd = Random();
+                        final r = rnd.nextInt(220);
+                        final g = rnd.nextInt(220);
+                        final b = rnd.nextInt(220);
+                        Color color = Color.fromARGB(255, r, g, b);
                         return InkWell(
                           onTap: () {
                             Get.toNamed(Routes.DETAILPORTAL, arguments: data1);
@@ -63,7 +66,7 @@ class _HomeViewState extends State<HomeView> {
                               width: Get.width,
                               height: 100,
                               decoration: BoxDecoration(
-                                  color: color1.colors(),
+                                  color: color,
                                   borderRadius: BorderRadius.circular(20)),
                               alignment: Alignment.center,
                               child: Text(

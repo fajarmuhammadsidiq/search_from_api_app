@@ -3,11 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class RandomColor {
-  int r = Random().nextInt(255);
-  int g = Random().nextInt(255);
-  int b = Random().nextInt(255);
+  int r;
+  int g;
+  int b;
 
-  colors() {
-    Color color = Color.fromARGB(255, r, g, b);
-  }
+  RandomColor({required this.b, required this.g, required this.r});
 }
