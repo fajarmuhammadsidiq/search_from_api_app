@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 import 'package:get/get.dart';
+import 'package:news_app/app/modules/const/randomcolor.dart';
+import 'package:news_app/app/routes/app_pages.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends StatefulWidget {
@@ -16,6 +18,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
+    final color1 = RandomColor();
     final controller = Get.find<HomeController>();
     Future refreshData() async {
       await Future.delayed(Duration(seconds: 2));
@@ -24,12 +27,15 @@ class _HomeViewState extends State<HomeView> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text('HomeView'),
+          title: const Text('ListBerita'),
           centerTitle: true,
+          backgroundColor: Colors.teal,
         ),
         body: RefreshIndicator(
           onRefresh: refreshData,
           child: ListView(children: [
+            TextField(),
+            SizedBox(height: 20),
             FutureBuilder(
               future: controller.getData(),
               builder: (context, snapshot) {
@@ -38,39 +44,38 @@ class _HomeViewState extends State<HomeView> {
                     child: CircularProgressIndicator(),
                   );
                 } else {
-                  return GridView.custom(
-                    physics: NeverScrollableScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    gridDelegate: SliverQuiltedGridDelegate(
-                      crossAxisCount: 3,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 10,
-                      repeatPattern: QuiltedGridRepeatPattern.inverted,
-                      pattern: [
-                        QuiltedGridTile(2, 2),
-                        QuiltedGridTile(1, 1),
-                        QuiltedGridTile(1, 1),
-                      ],
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.endpoints!.length,
+                      physics: NeverScrollableScrollPhysics(),
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        final data1 = snapshot.data!.endpoints![index];
+                        final data0 = snapshot.data!.endpoints![index].paths;
+                        return InkWell(
+                          onTap: () {
+                            Get.toNamed(Routes.DETAILPORTAL, arguments: data1);
+                          },
+                          child: Container(
+                              margin: EdgeInsets.only(bottom: 10),
+                              width: Get.width,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                  color: color1.colors(),
+                                  borderRadius: BorderRadius.circular(20)),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "${data1.name!.toUpperCase()}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                        );
+                      },
                     ),
-                    childrenDelegate: SliverChildBuilderDelegate(
-                        childCount: snapshot.data?.endpoints?.length,
-                        (context, index) {
-                      final data = snapshot.data!.endpoints![index];
-                      final rnd = Random();
-                      final r = rnd.nextInt(240) * 240;
-                      final g = rnd.nextInt(240) * 240;
-                      final b = rnd.nextInt(240) * 240;
-                      Color color = Color.fromARGB(255, r, g, b);
-                      return GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          alignment: Alignment.center,
-                          color: color,
-                          child: Text("${data.name}"),
-                        ),
-                      );
-                    }),
                   );
                   // return GridView.builder(
                   //   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

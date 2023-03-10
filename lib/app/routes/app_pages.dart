@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import '../modules/antara/bindings/antara_binding.dart';
 import '../modules/antara/views/antara_view.dart';
+import '../modules/detailportal/bindings/detailportal_binding.dart';
+import '../modules/detailportal/views/detailportal_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 
@@ -22,6 +24,11 @@ class AppPages {
       name: _Paths.ANTARA,
       page: () => const AntaraView(),
       binding: AntaraBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAILPORTAL,
+      page: () => const DetailportalView(),
+      binding: DetailportalBinding(),
     ),
   ];
 }

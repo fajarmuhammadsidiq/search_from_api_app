@@ -5,12 +5,12 @@ class AllModel {
 
   AllModel({this.maintainer, this.github, this.endpoints});
 
-  AllModel.fromJson(Map<String, dynamic> json) {
-    maintainer = json['maintainer'];
-    github = json['github'];
-    if (json['endpoints'] != null) {
+  AllModel.fromJson(Map<String, dynamic>? json) {
+    maintainer = json?['maintainer'];
+    github = json?['github'];
+    if (json?['endpoints'] != null) {
       endpoints = <Endpoints>[];
-      json['endpoints'].forEach((v) {
+      json?['endpoints'].forEach((v) {
         endpoints!.add(new Endpoints.fromJson(v));
       });
     }
@@ -33,11 +33,11 @@ class Endpoints {
 
   Endpoints({this.name, this.paths});
 
-  Endpoints.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    if (json['paths'] != null) {
+  Endpoints.fromJson(Map<String, dynamic>? json) {
+    name = json?['name'];
+    if (json?['paths'] != null) {
       paths = <Paths>[];
-      json['paths'].forEach((v) {
+      json?['paths'].forEach((v) {
         paths!.add(new Paths.fromJson(v));
       });
     }
@@ -59,9 +59,9 @@ class Paths {
 
   Paths({this.name, this.path});
 
-  Paths.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    path = json['path'];
+  Paths.fromJson(Map<String, dynamic>? json) {
+    name = json?['name'];
+    path = json?['path'];
   }
 
   Map<String, dynamic> toJson() {
