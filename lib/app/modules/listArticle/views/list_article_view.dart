@@ -14,7 +14,7 @@ class ListArticleView extends GetView<ListArticleController> {
     Paths data = Get.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text('${data.name}'),
+          title: Text('${data.name!.toUpperCase()}'),
           centerTitle: true,
         ),
         body: FutureBuilder(
@@ -43,6 +43,8 @@ class ListArticleView extends GetView<ListArticleController> {
                 itemBuilder: (context, index) {
                   final listArticle = snapshot.data?.data?.posts?[index];
                   return Card(
+                    elevation: 10,
+                    shadowColor: Colors.teal,
                     child: ListTile(
                       onTap: () => Get.toNamed(Routes.DETAIL_ARTICLE,
                           arguments: listArticle),

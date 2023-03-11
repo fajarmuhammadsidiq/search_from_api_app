@@ -25,6 +25,47 @@ class _HomeViewState extends State<HomeView> {
     }
 
     return Scaffold(
+        drawer: Drawer(
+          child: Container(
+            width: Get.width,
+            height: Get.height,
+            color: Colors.white,
+            child: ListView(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 20),
+                  width: Get.width,
+                  height: 300,
+                  color: Colors.teal,
+                  child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 75.0),
+                        child: Container(
+                          width: 150,
+                          height: 150,
+                          decoration: BoxDecoration(
+                              color: Colors.amber,
+                              borderRadius: BorderRadius.circular(360 / 2)),
+                        ),
+                      ),
+                      Text("fajar")
+                    ],
+                  ),
+                ),
+                ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.all(20),
+                  children: [
+                    ElevatedButton(onPressed: () {}, child: Text("Akun")),
+                    ElevatedButton(onPressed: () {}, child: Text("Favorite")),
+                    ElevatedButton(onPressed: () {}, child: Text("Keluar")),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
         appBar: AppBar(
           title: const Text('Portal Berita'),
           centerTitle: true,
